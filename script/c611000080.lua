@@ -21,7 +21,7 @@ function s.initial_effect(c)
 
 end
 s.listed_series={0x821,0x822,0x823}
-s.listed_names={id}
+s.listed_names={id,0x821,0x822,0x823}
 
 --Special Summon
 function s.ExtraFilter(c,e,tp)
