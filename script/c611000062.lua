@@ -11,41 +11,75 @@ function s.initial_effect(c)
     e1:SetCode(EFFECT_SPSUMMON_CONDITION)
     e1:SetValue(0)
     c:RegisterEffect(e1)
+    --Special Summon
+    local e2=Effect.CreateEffect(c)
+    e2:SetType(EFFECT_TYPE_FIELD)
+    e2:SetCode(EFFECT_SPSUMMON_PROC)
+    e2:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+    e2:SetRange(LOCATION_HAND)
+    e2:SetCondition(s.spcon)
+    e2:SetTarget(s.sptg)
+    e2:SetOperation(s.spop)
+    c:RegisterEffect(e2)
     --Tribute Summon
-    local e2=aux.AddNormalSummonProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
-    local e3=aux.AddNormalSetProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,1),s.otfilter)
+    local e3=aux.AddNormalSummonProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
+    local e4=aux.AddNormalSetProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,1),s.otfilter)
     --Unaffected
-    local e4=Effect.CreateEffect(c)
-    e4:SetType(EFFECT_TYPE_SINGLE)
-    e4:SetCode(EFFECT_IMMUNE_EFFECT)
-    e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-    e4:SetRange(LOCATION_MZONE)
-    e4:SetValue(s.unaffectedfilter)
-    c:RegisterEffect(e4)
-    --Destroy
     local e5=Effect.CreateEffect(c)
-    e5:SetDescription(aux.Stringid(id,2))
-    e5:SetCategory(CATEGORY_DESTROY)
-    e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-    e5:SetCode(EVENT_SPSUMMON_SUCCESS)
-    e5:SetProperty(EFFECT_FLAG_DELAY)
-    e5:SetCountLimit(1,{id,1})
-    e5:SetTarget(s.destg)
-    e5:SetOperation(s.desop)
+    e5:SetType(EFFECT_TYPE_SINGLE)
+    e5:SetCode(EFFECT_IMMUNE_EFFECT)
+    e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+    e5:SetRange(LOCATION_MZONE)
+    e5:SetValue(s.unaffectedfilter)
     c:RegisterEffect(e5)
-    --Equip
+    --Destroy
     local e6=Effect.CreateEffect(c)
-    e6:SetDescription(aux.Stringid(id,3))
-    e6:SetCategory(CATEGORY_LEAVE_GRAVE+CATEGORY_EQUIP)
-    e6:SetType(EFFECT_TYPE_IGNITION)
-    e6:SetProperty(EFFECT_FLAG_CARD_TARGET)
-    e6:SetRange(LOCATION_MZONE)
-    e6:SetCountLimit(1,{id,2})
-    e6:SetTarget(s.equiptg)
-    e6:SetOperation(s.equipop)
+    e6:SetDescription(aux.Stringid(id,2))
+    e6:SetCategory(CATEGORY_DESTROY)
+    e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+    e6:SetCode(EVENT_SPSUMMON_SUCCESS)
+    e6:SetProperty(EFFECT_FLAG_DELAY)
+    e6:SetCountLimit(1,{id,1})
+    e6:SetTarget(s.destg)
+    e6:SetOperation(s.desop)
     c:RegisterEffect(e6)
-    aux.AddEREquipLimit(c,nil,s.eqval,Card.EquipByEffectAndLimitRegister,e6)
+    --Equip
+    local e7=Effect.CreateEffect(c)
+    e7:SetDescription(aux.Stringid(id,3))
+    e7:SetCategory(CATEGORY_LEAVE_GRAVE+CATEGORY_EQUIP)
+    e7:SetType(EFFECT_TYPE_IGNITION)
+    e7:SetProperty(EFFECT_FLAG_CARD_TARGET)
+    e7:SetCountLimit(1,id)
+    e7:SetRange(LOCATION_MZONE)
+    e7:SetCountLimit(1,{id,2})
+    e7:SetTarget(s.equiptg)
+    e7:SetOperation(s.equipop)
+    c:RegisterEffect(e7)
+    aux.AddEREquipLimit(c,nil,s.eqval,Card.EquipByEffectAndLimitRegister,e7)
     
+end
+s.listed_series={0x821}
+s.listed_names={id,611000061}
+
+--Special Summon
+function s.spcon(e,c)
+    if c==nil then return true end
+    return Duel.CheckReleaseGroup(c:GetControler(),Card.IsCode,1,false,1,true,c,c:GetControler(),nil,false,nil,611000061)
+end
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
+    local g=Duel.SelectReleaseGroup(tp,Card.IsCode,1,1,false,true,true,c,nil,nil,false,nil,611000061)
+    if g then
+        g:KeepAlive()
+        e:SetLabelObject(g)
+    return true
+    end
+    return false
+end
+function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
+    local g=e:GetLabelObject()
+    if not g then return end
+    Duel.Release(g,REASON_COST)
+    g:DeleteGroup()
 end
 
 --Tribute Summon

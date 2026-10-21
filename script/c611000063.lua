@@ -18,7 +18,7 @@ function s.initial_effect(c)
     c:RegisterEffect(e2)
     --If this card is sent to the GY: You can Special Summon 1 "Digimon Omega Shotmon" from your Hand, Deck, or GY.
     local e3=Effect.CreateEffect(c)
-    e3:SetDescription(aux.Stringid(id,2))
+    e3:SetDescription(aux.Stringid(id,1))
     e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
     e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
     e3:SetProperty(EFFECT_FLAG_DELAY)
@@ -28,6 +28,8 @@ function s.initial_effect(c)
     e3:SetOperation(s.tgspop)
     c:RegisterEffect(e3)
 end
+s.listed_names={id,611000064}
+
 --If this card is Normal or Special Summoned: You can destroy up to 2 face-up monster your opponent control, and if you do, takes damage equal to the total ATK the destroyed monster has on the field.
 function s.desfilter(c)
     return c:IsMonster() and c:IsFaceup()
