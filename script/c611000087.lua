@@ -34,7 +34,7 @@ s.listed_names={id,611000088}
 
 --If this card is Normal or Special Summoned: You can add 1 Spell that mentions “Digimon” or “Seven Knight” from your Deck to your Hand
 function s.thfilter(c)
-    return (c:IsSetCard({0x821,0x823}) or c:ListsCodeWithArchetype({0x821,0x823}) and c:IsSpell() and c:IsAbleToHand()
+    return (c:IsSetCard({0x821,0x823}) or c:ListsCodeWithArchetype({0x821,0x823})) and c:IsSpell() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
     if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
