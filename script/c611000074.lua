@@ -16,7 +16,6 @@ function s.initial_effect(c)
     e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
     e2:SetRange(LOCATION_MZONE)
     e2:SetTargetRange(LOCATION_MZONE,0)
-    e2:SetTarget(s.indtg)
     e2:SetValue(1)
     c:RegisterEffect(e2)
 end
@@ -26,9 +25,4 @@ s.listed_names={id}
 --Unaffected by Opponent Card Effects
 function s.unval(e,te)
     return te:GetOwnerPlayer()~=e:GetHandlerPlayer()
-end
-
---Monsters you control cannot be destroyed by battle
-function s.indtg(e,c)
-    return c~=e:GetHandler()
 end

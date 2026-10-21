@@ -36,6 +36,7 @@ function s.initial_effect(c)
     c:RegisterEffect(e5)
 end
 s.listed_series={0x823}
+s.listed_names={id}
 
 --Your opponent cannot Tribute Monster equipped with this card
 function s.sumlimit(e,c)
