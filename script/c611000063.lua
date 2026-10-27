@@ -1,5 +1,6 @@
-﻿-- add OCG card name
+﻿--デジモン・シャウトモン
 --Digimon Shoutmon
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     --If this card is Normal or Special Summoned: You can destroy up to 2 face-up monster your opponent control, and if you do, takes damage equal to the total ATK the destroyed monster has on the field.

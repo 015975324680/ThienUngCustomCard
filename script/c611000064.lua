@@ -1,5 +1,6 @@
-﻿-- add OCG card name
+﻿--デジモン・オメガシャウトモン
 --Digimon Omega Shotmon
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     c:EnableReviveLimit()
@@ -13,6 +14,7 @@ function s.initial_effect(c)
     c:RegisterEffect(e1)
     --Special Summon
     local e2=Effect.CreateEffect(c)
+    e2:SetDescription(aux.Stringid(id,0))
     e2:SetType(EFFECT_TYPE_FIELD)
     e2:SetCode(EFFECT_SPSUMMON_PROC)
     e2:SetProperty(EFFECT_FLAG_UNCOPYABLE)
@@ -22,8 +24,8 @@ function s.initial_effect(c)
     e2:SetOperation(s.spop)
     c:RegisterEffect(e2)
     --Tribute Summon
-    local e3=aux.AddNormalSummonProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
-    local e4=aux.AddNormalSetProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,1),s.otfilter)
+    local e3=aux.AddNormalSummonProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,1),s.otfilter)
+    local e4=aux.AddNormalSetProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,2),s.otfilter)
     --Unaffected
     local e5=Effect.CreateEffect(c)
     e5:SetType(EFFECT_TYPE_SINGLE)
@@ -34,7 +36,7 @@ function s.initial_effect(c)
     c:RegisterEffect(e5)
     --Destroy
     local e6=Effect.CreateEffect(c)
-    e6:SetDescription(aux.Stringid(id,2))
+    e6:SetDescription(aux.Stringid(id,3))
     e6:SetCategory(CATEGORY_DESTROY)
     e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
     e6:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -45,7 +47,7 @@ function s.initial_effect(c)
     c:6RegisterEffect(e6)
     --Equip
     local e7=Effect.CreateEffect(c)
-    e7:SetDescription(aux.Stringid(id,3))
+    e7:SetDescription(aux.Stringid(id,4))
     e7:SetCategory(CATEGORY_LEAVE_GRAVE+CATEGORY_EQUIP)
     e7:SetType(EFFECT_TYPE_IGNITION)
     e7:SetProperty(EFFECT_FLAG_CARD_TARGET)

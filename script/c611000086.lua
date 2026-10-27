@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Seven God Shoutmon X7
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     c:EnableReviveLimit()

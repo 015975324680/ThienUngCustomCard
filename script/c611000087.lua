@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Seven Knight Gatchmon
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     --If this card is Normal or Special Summoned: You can add 1 Spell that mentions “Digimon” or “Seven Knight” Monster from your Deck to your Hand
@@ -18,7 +19,7 @@ function s.initial_effect(c)
     c:RegisterEffect(e2)
     --If this card is sent to the GY: You can Special Summon 1 “Seven Knight Gaiamon” from your Hand, Deck, GY, or Banishment
     local e3=Effect.CreateEffect(c)
-    e3:SetDescription(aux.Stringid(id,2))
+    e3:SetDescription(aux.Stringid(id,1))
     e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
     e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
     e3:SetProperty(EFFECT_FLAG_DELAY)

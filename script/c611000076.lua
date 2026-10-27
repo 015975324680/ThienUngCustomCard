@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Seven Knight Omegashoutmon
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     c:EnableReviveLimit()
@@ -38,7 +39,7 @@ function s.initial_effect(c)
     c:RegisterEffect(e4)
     --If this card destroys a Monster by battle and sends it to the GY: Inflict damage to your opponent equal to the ATK of the destroyed monster in the GY
     local e5=Effect.CreateEffect(c)
-    e5:SetDescription(aux.Stringid(id,0))
+    e5:SetDescription(aux.Stringid(id,1))
     e5:SetCategory(CATEGORY_DAMAGE)
     e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
     e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)

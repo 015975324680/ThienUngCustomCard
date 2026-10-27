@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Seven Knight Agumon Spirits
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     --All face-up Monsters on the Field and in the GY(s) become FIRE
@@ -20,7 +21,7 @@ function s.initial_effect(c)
     c:RegisterEffect(e2)
     --If this card is sent to the GY: You can Special Summon 1 “Seven Knight Shinegreymon” from your Deck
     local e3=Effect.CreateEffect(c)
-    e3:SetDescription(aux.Stringid(id,2))
+    e3:SetDescription(aux.Stringid(id,0))
     e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
     e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
     e3:SetProperty(EFFECT_FLAG_DELAY)

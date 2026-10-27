@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Brave Snatcher
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     aux.AddEquipProcedure(c)

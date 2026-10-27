@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Seven Knight Guilimon
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     --If this card is Normal Summoned: You can Special Summon 1 "Digimon" or "Seven Knight" from your Hand or Deck to your Field in Defense Position, also until the end of this turn, you cannot Normal or Special Summon Monster, except "Digimon" and "Seven Knight" Monster

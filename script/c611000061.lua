@@ -1,5 +1,6 @@
-﻿--ガムドラモン
+﻿--デジモン・ガムドラモン
 --Digimon Gumdramon
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     --If your opponent controls more monsters than you do, this card can attack your opponent directly.

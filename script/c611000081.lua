@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Seven Knight Crimson Dukumon
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     c:EnableReviveLimit()

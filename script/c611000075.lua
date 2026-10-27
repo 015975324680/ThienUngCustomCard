@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Seven King Shoutmon
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     --During your Main Phase: You can Discard 1 card and target 1 Monster your opponent control; take control of it until the End Phase
@@ -16,7 +17,7 @@ function s.initial_effect(c)
     c:RegisterEffect(e1)
     --If this card is sent to the GY: You can Special Summon 1 “Seven Knight Omegashoutmon” from your Deck
     local e2=Effect.CreateEffect(c)
-    e2:SetDescription(aux.Stringid(id,2))
+    e2:SetDescription(aux.Stringid(id,1))
     e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
     e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
     e2:SetProperty(EFFECT_FLAG_DELAY)

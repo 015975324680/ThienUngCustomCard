@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Arresterdramon Superior Mode
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     --battle Indestructable

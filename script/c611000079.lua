@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Ultimate Arresterdramon
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     c:EnableReviveLimit()

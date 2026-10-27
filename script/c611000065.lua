@@ -1,5 +1,6 @@
 ﻿-- add OCG card name
 --Seven Knight Agumon
+--Scripted by Trí Dũng Song Toàn
 local s,id,o=GetID()
 function s.initial_effect(c)
     --If this card is Normal or Special Summoned: You can add 1 “Digimon” or “Seven Knight” card from your Deck to your Hand
@@ -34,7 +35,7 @@ s.listed_names={id}
 
 --If this card is Normal or Special Summoned: You can add 1 “Digimon” or “Seven Knight” card from your Deck to your Hand
 function s.thfilter(c,tp)
-    return c:IsSetCard({0x821,0x823}) and c:IsAbleToHand()
+    return c:IsSetCard({0x821,0x823}) and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
     if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -60,14 +61,29 @@ function s.tgsptg(e,tp,eg,ep,ev,re,r,rp,chk)
     Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.tgspop(e,tp,eg,ep,ev,re,r,rp)
+    local c=e:GetHandler()
     local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
     if ft<=0 then return end
+    
     local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
     if #g==0 then return end
+    
     ft=math.min(ft,#g)
     if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-    local sg=aux.SelectUnselectGroup(g,e,tp,1,ft,aux.dpcheck(Card.GetLevel),1,tp,HINTMSG_SPSUMMON)
+    
+    local sg=aux.SelectUnselectGroup(g,e,tp,1,ft,
+        function(sg,e,tp,mg) return sg:GetClassCount(Card.GetLevel)==#sg end,
+        1,tp,HINTMSG_SPSUMMON)
+        
     if #sg>0 then
         Duel.SpecialSummon(sg,0,tp,tp,true,true,POS_FACEUP)
+        
+        -- Monsters you control cannot declare an attack
+        local e1=Effect.CreateEffect(c)
+        e1:SetType(EFFECT_TYPE_FIELD)
+        e1:SetCode(EFFECT_CANNOT_ATTACK)
+        e1:SetTargetRange(LOCATION_MZONE,0)
+        e1:SetReset(RESET_PHASE|PHASE_END,3)
+        Duel.RegisterEffect(e1,tp)
     end
 end
