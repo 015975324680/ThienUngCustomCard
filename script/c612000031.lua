@@ -20,6 +20,7 @@ function s.initial_effect(c)
     e2:SetRange(LOCATION_MZONE)
     e2:SetCode(EFFECT_IMMUNE_EFFECT)
     e2:SetValue(s.unval)
+    c:RegisterEffect(e2)
     --You can target up to 5 cards in your GY; shuffle them into the Deck, then shuffle the same number of cards from your opponent’s GY into their Deck
     local e3=Effect.CreateEffect(c)
     e3:SetDescription(aux.Stringid(id,0))
