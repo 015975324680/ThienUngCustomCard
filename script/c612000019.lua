@@ -55,7 +55,7 @@ end
 
 --Contact Fusion
 function s.hspfilter(c,tp,sc)
-    return c:IsCode(612000017) and c:IsFaceup() and c:GetEquipGroup():IsExists(Card.IsOriginalCode,1,nil,611000078)
+    return c:IsCode(612000017) and c:IsFaceup() and c:GetEquipGroup():IsExists(Card.IsOriginalCode,1,nil,612000018)
         and c:IsAbleToRemoveAsCost() and Duel.GetLocationCountFromEx(tp,tp,c,sc)>0
 end
 function s.hspcon(e,c)
